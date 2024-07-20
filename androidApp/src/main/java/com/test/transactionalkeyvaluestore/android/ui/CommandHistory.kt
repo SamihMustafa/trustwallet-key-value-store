@@ -18,6 +18,7 @@ fun CommandHistoryView(
     modifier: Modifier = Modifier,
     outputList: List<CommandHistory>
 ) {
+    // No need for a key since the default index is sufficient
     LazyColumn(
         modifier = modifier,
         verticalArrangement = Arrangement.Bottom

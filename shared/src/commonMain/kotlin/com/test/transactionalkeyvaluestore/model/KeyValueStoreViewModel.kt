@@ -1,8 +1,6 @@
-package com.test.transactionalkeyvaluestore
+package com.test.transactionalkeyvaluestore.model
 
 import com.test.transactionalkeyvaluestore.base.BaseViewModel
-import com.test.transactionalkeyvaluestore.base.UiIntent
-import com.test.transactionalkeyvaluestore.base.UiState
 import com.test.transactionalkeyvaluestore.data.CommandHistory
 import com.test.transactionalkeyvaluestore.data.Commands
 import com.test.transactionalkeyvaluestore.data.KeyValueStore
@@ -10,24 +8,24 @@ import com.test.transactionalkeyvaluestore.data.MessageType
 
 class KeyValueStoreViewModel(
     val keyValueStore: KeyValueStore = KeyValueStore()
-) : BaseViewModel<KeyValueStoreContract.Intent, KeyValueStoreContract.State>() {
+) : BaseViewModel<KeyValueStoreIntent, KeyValueStoreState>() {
 
-    override fun createInitialState(): KeyValueStoreContract.State {
-        return KeyValueStoreContract.State(
+    override fun createInitialState(): KeyValueStoreState {
+        return KeyValueStoreState(
             selectedCommand = Commands.SET,
             commandHistory = emptyList(),
             paramValueList = List(Commands.SET.paramsLabels.size) { "" }
         )
     }
 
-    override fun handleIntent(intent: KeyValueStoreContract.Intent) {
+    override fun handleIntent(intent: KeyValueStoreIntent) {
         when (intent) {
-            is KeyValueStoreContract.Intent.UpdateCommand -> updateCommand(intent.command)
-            is KeyValueStoreContract.Intent.UpdateParams -> updateParams(
+            is KeyValueStoreIntent.UpdateCommand -> updateCommand(intent.command)
+            is KeyValueStoreIntent.UpdateParams -> updateParams(
                 intent.index,
                 intent.newValue
             )
-            is KeyValueStoreContract.Intent.AcceptCommand -> acceptCommand()
+            is KeyValueStoreIntent.AcceptCommand -> acceptCommand()
         }
     }
 
@@ -51,7 +49,7 @@ class KeyValueStoreViewModel(
     }
 
     private fun acceptCommand() {
-        when (val selectedCommand = currentState.selectedCommand) {
+        when (currentState.selectedCommand) {
             Commands.SET -> set(
                 currentState.paramValueList[0],
                 currentState.paramValueList[1]
@@ -166,17 +164,3 @@ class KeyValueStoreViewModel(
 
 }
 
-class KeyValueStoreContract {
-
-    sealed interface Intent : UiIntent {
-        data class UpdateParams(val index: Int, val newValue: String) : Intent
-        data class UpdateCommand(val command: Commands) : Intent
-        data object AcceptCommand : Intent
-    }
-
-    data class State(
-        val selectedCommand: Commands,
-        val paramValueList: List<String>,
-        val commandHistory: List<CommandHistory>
-    ) : UiState
-}
