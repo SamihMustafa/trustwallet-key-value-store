@@ -1,5 +1,6 @@
 package com.test.transactionalkeyvaluestore
 
+import com.test.transactionalkeyvaluestore.data.KeyValueStore
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

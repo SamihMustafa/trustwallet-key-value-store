@@ -1,4 +1,4 @@
-package com.test.transactionalkeyvaluestore
+package com.test.transactionalkeyvaluestore.data
 
 class KeyValueStore {
 
@@ -90,20 +90,6 @@ class KeyValueStore {
         return transactions.lastOrNull()
     }
 
-    data class Storage(var store: MutableMap<String, String?> = mutableMapOf()) {
 
-        fun set(key: String, value: String) {
-            store[key] = value
-        }
-
-        fun get(key: String): String? {
-            return store[key]
-        }
-
-        fun delete(key: String) {
-            store[key] = null
-        }
-
-    }
 
 }
