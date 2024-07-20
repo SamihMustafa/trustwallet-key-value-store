@@ -6,8 +6,9 @@ import com.test.transactionalkeyvaluestore.data.Commands
 import com.test.transactionalkeyvaluestore.data.KeyValueStore
 import com.test.transactionalkeyvaluestore.data.MessageType
 
+
 class KeyValueStoreViewModel(
-    val keyValueStore: KeyValueStore = KeyValueStore()
+    private val keyValueStore: KeyValueStore = KeyValueStore()
 ) : BaseViewModel<KeyValueStoreIntent, KeyValueStoreState>() {
 
     override fun createInitialState(): KeyValueStoreState {
