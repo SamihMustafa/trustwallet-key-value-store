@@ -1,7 +1,6 @@
 package com.test.transactionalkeyvaluestore.base
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.test.transactionalkeyvaluestore.model.ViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow

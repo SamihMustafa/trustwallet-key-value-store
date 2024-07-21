@@ -18,6 +18,7 @@ import com.test.transactionalkeyvaluestore.android.ui.CommandHistoryView
 import com.test.transactionalkeyvaluestore.android.ui.CommandInput
 import com.test.transactionalkeyvaluestore.model.KeyValueStoreIntent
 import com.test.transactionalkeyvaluestore.model.KeyValueStoreState
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +37,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ClientScreen() {
-    val viewModel = remember { KeyValueStoreViewModel() }
+fun ClientScreen(viewModel: KeyValueStoreViewModel = viewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Client(

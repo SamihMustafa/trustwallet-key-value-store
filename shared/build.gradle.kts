@@ -12,13 +12,27 @@ kotlin {
         }
     }
 
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
+
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
-            api(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.coroutine)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        androidMain.dependencies {
+            api(libs.androidx.lifecycle.viewmodel)
         }
     }
 }
