@@ -34,7 +34,7 @@ fun CommandHistoryView(
         if (itemSize > 0)
             listState.animateScrollToItem(outputList.size - 1)
     }
-    // No need for a key since the default index is sufficient
+    // No need for a key since the default key is based on the index is sufficient
     LazyColumn(
         modifier = modifier,
         state = listState,
