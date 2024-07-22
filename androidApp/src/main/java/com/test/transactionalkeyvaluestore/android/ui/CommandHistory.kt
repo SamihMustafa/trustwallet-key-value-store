@@ -3,9 +3,16 @@ package com.test.transactionalkeyvaluestore.android.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -18,9 +25,19 @@ fun CommandHistoryView(
     modifier: Modifier = Modifier,
     outputList: List<CommandHistory>
 ) {
+    val listState = rememberLazyListState()
+    val itemSize by remember(outputList.size) {
+        mutableIntStateOf(outputList.size)
+    }
+
+    LaunchedEffect(itemSize) {
+        if (itemSize > 0)
+            listState.animateScrollToItem(outputList.size - 1)
+    }
     // No need for a key since the default index is sufficient
     LazyColumn(
         modifier = modifier,
+        state = listState,
         verticalArrangement = Arrangement.Bottom
     ) {
         items(

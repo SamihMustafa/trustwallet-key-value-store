@@ -104,7 +104,7 @@ class KeyValueStoreViewModel(
         setState {
             copy(
                 commandHistory = commandHistory.toMutableList().apply {
-                    add(CommandHistory(MessageType.INPUT, "${selectedCommand.action} $value"))
+                    add(CommandHistory(MessageType.INPUT, "${selectedCommand.action} $key"))
                     if (value != null) add(CommandHistory(MessageType.RESULT, value.toString()))
                     else add(CommandHistory(MessageType.ERROR, "Key not set"))
                 },
